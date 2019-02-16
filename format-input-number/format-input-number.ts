@@ -3,13 +3,12 @@ import { hostElement } from '@angular/core/src/render3/instructions';
 import { FormControl, FormControlName, NgControl } from '@angular/forms';
 
 /**
- * Generated class for the FormatInputNumberDirective directive.
- *
- * See https://angular.io/api/core/Directive for more info on Angular
- * Directives.
+ * Import this directive to parse number-type input fields automatically
+ * from string to number.
+ * @author Raschid J.F. Rafaelly <lachach&commat;gmail.com>
  */
 @Directive({
-  selector: 'ion-input[type="number"]' // Attribute selector
+  selector: 'input[type="number"], ion-input[type="number"]' // Attribute selector
 })
 export class FormatInputNumberDirective {
   @Input('value') value: any;
@@ -18,7 +17,13 @@ export class FormatInputNumberDirective {
 
     // Get <input> element's value
     let hostElement = this.headerRef.nativeElement as HTMLElement;
-    let inputElement = hostElement.getElementsByTagName('input')[0];
+
+    let inputElement: HTMLInputElement;
+    if (hostElement.tagName == 'input')
+      inputElement = hostElement as HTMLInputElement;
+    else
+      inputElement = hostElement.getElementsByTagName('input')[0];
+
     let parsedVal = parseFloat(inputElement.value);
 
     // Get form control   
@@ -29,6 +34,8 @@ export class FormatInputNumberDirective {
 
   }
 
-  constructor(private headerRef: ElementRef, private ngControl: NgControl) { }
+  constructor(private headerRef: ElementRef, private ngControl: NgControl) { 
+    
+  }
 
 }
