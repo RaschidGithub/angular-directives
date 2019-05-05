@@ -46,7 +46,7 @@ export class InputAutocompleteDirective {
 		else if (event.keyCode) {
 			if ((event.keyCode < 48 || 90 < event.keyCode) && event.keyCode != 32) return;
 		} else {
-			console.error("Can't find key nor keycode in keyboardevent");
+			console.error('Can\'t find key nor keycode in keyboardevent');
 			return;
 		}
 
@@ -59,7 +59,7 @@ export class InputAutocompleteDirective {
 
 		// Get form control   
 		if (this.ngControl && foundText && currentVal.length >= this.minLength) {
-			let back = event.key == "Backspace";
+			let back = event.key == 'Backspace';
 			this.ngControl.control.setValue(foundText);
 			inputElement.setSelectionRange(currentVal.length - (back ? 1 : 0), foundText.length);
 		}
